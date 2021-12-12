@@ -1,3 +1,4 @@
+//incompleto
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,9 +9,10 @@ struct posiciones{
    int x_final;
    int y_final;
 };
+
 bool comprobar(int indice, int xInicialActual, int yInicialActual, int xFinalActual, int yFinalActual, vector <posiciones> &ventanas){
    if(indice < (ventanas.size() - 2)){
-      
+      if 
    }
 }
 int indice = 0;
