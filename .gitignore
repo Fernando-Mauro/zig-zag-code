@@ -32,3 +32,5 @@
 *.out
 *.app
 binarios
+.vscode
+*.txt
