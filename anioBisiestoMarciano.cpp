@@ -42,6 +42,7 @@ int main(){
    // cout << "Dias del anio actual: " << diasactuales;
    total = (anosbisiestos * diasAnioBisiesto) + (anosnormales * diasAnioNormal) + diasactuales;
    // cout << endl << "Los dias totales pasados son: " << total;
-   cout << total % 7;
+   int numero = total % 7 == 0 ? 7 : total % 7;
+   cout << numero << endl;
    return 0;
 }
