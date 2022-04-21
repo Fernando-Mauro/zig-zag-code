@@ -33,7 +33,6 @@ int main(){
    int dia,mes, anio, total = 0;
    cin >> dia >> mes >> anio;
    int anospasados = (anio - 1) - 2000;
-   // cout << "Anos pasados: " << anospasados << endl;
    int anosbisiestos = anospasados / 5;
    // cout << "Anos bisiestos:" << anosbisiestos << endl;
    int anosnormales = anospasados - anosbisiestos;

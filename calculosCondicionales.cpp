@@ -11,6 +11,7 @@ int reducir(int numero){
       modificaciones++;      
       numero++;
    }
+   //segundo proceso
    if(numero >= 100){
       modificaciones++;
       numero /= 100;
@@ -18,6 +19,7 @@ int reducir(int numero){
       numero /= 10;
       modificaciones++;
    }
+   //tercer proceso
    if(numero % 3 == 0){
       numero--;
       modificaciones++;

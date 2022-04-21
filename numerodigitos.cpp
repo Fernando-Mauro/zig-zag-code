@@ -3,41 +3,22 @@
 using namespace std;
 
 int main(){
-   long long int numero = 0;
-   long long int total= 0;
+   unsigned long long int numero = 0;
+   unsigned long long int total= 0;
+   int digitos = 1;
    cin >> numero;
-   for(long long int i = 1; i <= numero; i++){
-      if(i < 10){
-         total++;
-         continue;
-      }else if(i >= 10 && i < 100){
-         total += 2;
-         continue;
-      }else if(i >= 100 && i < 1000){
-         total += 3;
-         continue;
-      }else if(i >= 1000 && i <10000){
-         total += 4;
-         continue;
-
-      }else if(i >= 10000 && i <100000){
-         total += 5;
-         continue;
-
-      }else if(i >= 100000 && i <1000000){
-         total += 6;
-         continue;
-
-      }else if(i >= 1000000 && i <10000000){
-         total += 7;
-         continue;
-
-      }else if(i >= 10000000 && i <100000000){
-         total += 8;
-         continue;
-      }
-
+   unsigned long long int anterior = 0;
+   unsigned long long int i;
+   for(i = 10; i < numero; i *= 10){
+      total += (i - (anterior)) * digitos;
+      anterior = i;
+      digitos++;
    }
-   cout << total << endl;
+   total += (numero - (anterior)) * digitos;
+   if(numero == 10 || numero == 100 || numero == 1000 || numero == 10000 || numero == 100000 || numero == 1000000 || numero == 10000000 || numero == 100000000 || numero == 1000000000){
+      cout << total + digitos;
+   }else{
+   cout << total + digitos - 1;
+   }
    return 0;
 }

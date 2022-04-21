@@ -14,7 +14,7 @@ int main(){
       cin >> cantidad;
       tiempos.push_back(cantidad);
    }
-   cout <<    recorrerMetros(tiempos, segundos, metros) + banderazo;
+   cout <<recorrerMetros(tiempos, segundos, metros) + banderazo;
    return 0;
 }
 int recorrerMetros(vector <int> &tiempos, int segundos, int metros){
