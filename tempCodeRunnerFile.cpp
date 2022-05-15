@@ -1,30 +1,31 @@
-#include <iostream>
-
-using namespace std;
-
-int main(){
-   int n;
-   cin >> n;
-   int inicial =1, final =n;
-   bool principio = true, fin = false;
-   for(int i = 1; i <= (n / 2)+1; i++){
-      if(inicial == final){
-         cout << inicial << " ";
-         break;
-      }
-      if(principio){
-         cout << inicial << " " << final << " ";
-         inicial += 1;
-         final -= 1;
-         fin = true;
-         principio = false;
-      }else if(fin){
-         cout << final << " " << inicial << " ";
-         inicial += 1;
-         final -= 1;
-         fin = false;
-         principio = true;
+bool comprobar(string &first, string &second){
+   map <char,int> cuenta1;
+   map <char,int> cuenta2;
+   for(int i = 0; i < first.length(); i++){
+      char caracter = first[i];
+      if(cuenta1.find(caracter) != cuenta1.end()){
+         cuenta1.find(caracter) -> second++;
+      }else{
+         cuenta1.insert(pair <char, int> (caracter,1));
       }
    }
-   return 0;
+   for(int i = 0; i < second.length(); i++){
+      char caracter = second[i];
+      if(cuenta2.find(caracter) != cuenta2.end()){
+         cuenta2.find(caracter) -> second++;
+      }else{
+         cuenta2.insert(pair <char, int> (caracter,1));
+      }
+   }
+   for(auto el : cuenta1 ){
+      if(cuenta2.find(el.first) !=cuenta2.end()){  
+         int cantidad = cuenta2.find(el.first) -> second;
+         if(cantidad != el.second){
+            return false;
+         }
+      }else{
+         return false;
+      }
+   }
+   return true;
 }
