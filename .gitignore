@@ -37,4 +37,4 @@ binarios
 * 
 !*.cpp
 !Makefile
-.vscode
+/.vscode
