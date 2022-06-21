@@ -17,7 +17,6 @@ int caminar(int posicionRoco, int pisoActualRoco, vector<elevador> &elv, int ext
    {
       int pisoInicialElv = elv[posicionRoco - 1].pisoInicial;
       int pisoFInalElv = elv[posicionRoco - 1].pisoFinal;
-      posicionRoco++;
       if (posicionRoco == extremo)
       {
          return pisoActualRoco;
@@ -32,11 +31,15 @@ int caminar(int posicionRoco, int pisoActualRoco, vector<elevador> &elv, int ext
          // cout << "Bingo, hay un elevador que baja frente a mi";
          pisoActualRoco--;
       }
+      posicionRoco++;
    }
    return pisoActualRoco;
 }
 int main()
 {
+
+   cin.tie(nullptr);
+   ios_base::sync_with_stdio(false);
    int pisos, elevadores;
    cin >> pisos >> elevadores;
    vector<elevador> elv(elevadores);
@@ -54,6 +57,6 @@ int main()
       int posicionRoco = 1;
       // piso vertical
       int piso = i + 1;
-      cout << caminar(posicionRoco, piso, elv, elevadores) << endl;
+      cout << caminar(posicionRoco, piso, elv, elevadores + 1) << endl;
    }
 }
