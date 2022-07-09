@@ -1,49 +1,32 @@
+// https://omegaup.com/arena/problem/A-jugar-2048
 #include <bits/stdc++.h>
+
 using namespace std;
 
-int main() {
-    
-    int cantidad;
-    stack<int> elementos;
-    int first;
-    int elemento;
-    int sumaiguales = 0;
-    int count = 1;
-
-    cin >> cantidad;
-    cin >> first;
-
-    elementos.push(first);
-
-    while( count < cantidad ) {
-        cin >> elemento;
-        int auxiliar = elementos.top();
-        sumaiguales  = 0;
-        if ( auxiliar == elemento ) {
-            sumaiguales = elemento + auxiliar;
-            elementos.pop();
-            while(!elementos.empty()) {
-                if (elementos.top() == sumaiguales ) {
-                    sumaiguales += elementos.top();
-                    elementos.pop();
-                }else {
-                    break;
-                }
-            }
-            elementos.push(sumaiguales);
-        }else {
-            elementos.push(elemento);
+int main(){
+    int n;
+    cin >>n;
+    int aux;
+    stack <int> pila;
+    while(n--){
+        cin >> aux;
+        int topElement = aux;
+        int popElement = pila.empty() ? -1: pila.top();
+        while(topElement == popElement){
+            int sum = topElement + popElement;
+            pila.pop();
+            pila.push(sum);
+            topElement = pila.empty() ? 0 : pila.top();
+            pila.pop();
+            popElement = pila.empty()? -1: pila.top();
         }
-        count++;
+        pila.push(topElement);
+
     }
-
-    cout << elementos.size() << endl;
-
-    while(!elementos.empty()) {
-        cout << elementos.top() << endl;
-        elementos.pop();
+    cout << pila.size() << endl;
+    while(!pila.empty()){
+        cout << pila.top() << endl;
+        pila.pop();
     }
-
-
     return 0;
 }
