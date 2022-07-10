@@ -1,68 +1,58 @@
 //https://omegaup.com/arena/problem/Juanito-y-los-primos/
-#include <iostream>
-#include <cstdio>
-#include <vector>
-#include <bitset>
+#include <bits/stdc++.h>
 
-#define MAX 10000001
 using namespace std;
 
-typedef long long int ll;
+#define MAX 10000001
 
+bitset <MAX> criba;
+vector <long long int> primos;
 
-void fill_sieve(vector<int> &primes) {
-    bitset<MAX> sieve;
-
-    sieve.set();
-    sieve.reset(0); sieve.reset(1);
-    for( int i = 2; i < MAX; i++ ) {
-        if( sieve[i] ) {
-            primes.push_back(i);
-            for( int j = i*2; j < MAX; j+=i ) {
-                sieve.reset(j);
+void rellenarCriba(){
+    // cambia a true todos los valores
+    criba.set();
+    // cambia a false esos dos valores
+    criba.reset(0);
+    criba.reset(1);
+    for(int i = 2; i < MAX; i++){
+        if(criba[i]){
+            primos.push_back(i);
+            for(int j = i * 2; j < MAX; j+= i ){
+                criba.reset(j);
             }
-        }
+        }   
     }
 }
 
-bool count_divisors(ll number, vector<int> &primes) {
-    int divisors = 1;
-
-    for (int i = 0; i < primes.size() && primes[i] * primes[i] <= number; i++) {
-        int factor_times = 1;
-        while (number % primes[i] == 0) {
-            number /= primes[i];
-            factor_times ++;
+bool esPrimo(unsigned long long int number){
+    int divisores = 1;
+    long long int raiz = sqrt(number);
+    for(int i = 0; i < primos.size() && primos[i] <= number; ++i){
+        int vecesPrimo = 1;
+        while(number % primos[i] == 0){
+            vecesPrimo++;
+            number /= primos[i];
         }
-        divisors *= factor_times;
+        divisores *= vecesPrimo;
+    }
+    if(number != 1){
+        divisores *= 2;
     }
 
-    if (number != 1) {
-        divisors*=2;
-    }
-
-    if ( divisors == 2 ) {
-        return false;
-    }else {
+    if(divisores == 2){
+        // Es primo
         return true;
     }
+    return false;
 }
-
 int main(){
-
-    ll  num;
-    // Calcular factores primos hasta la raiz del máximo posible
-    vector<int> primes;
-    fill_sieve(primes);
-
-
-    cin >> num;
-        
-    if ( count_divisors(num, primes) == true ) {
-        cout << "no es primo" << endl;
-    }else {
+    unsigned long long int n;
+    cin >> n;
+    rellenarCriba();
+    if(esPrimo(n)){
         cout << "si es primo";
+    }else{
+        cout << "no es primo";
     }
-
     return 0;
 }

@@ -25,20 +25,20 @@ void fill_sieve(vector<int> &primes) {
 int count_divisors(int number, vector<int> &primes) {
     int divisors = 1;
 
-    for (int i = 0; i < primes.size() && primes[i] * primes[i] <= number; i++) {
-        int factor_times = 1;
-        while (number % primes[i] == 0) {
-            number /= primes[i];
-            factor_times ++;
-        }
-        divisors *= factor_times;
-    }
+   for (int i = 0; i < primes.size() && primes[i] * primes[i] <= number; i++) {
+      int factor_times = 1;
+      while (number % primes[i] == 0) {
+         number /= primes[i];
+         factor_times ++;
+      }
+      divisors *= factor_times;
+   }
 
-    if (number != 1) {
-        divisors*=2;
-    }
+   if (number != 1) {
+      divisors*=2;
+   }
 
-    return divisors;
+   return divisors;
 }
 
 int main(){
