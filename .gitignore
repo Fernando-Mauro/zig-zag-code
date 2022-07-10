@@ -35,6 +35,3 @@ binarios
 .vscode
 *.txt
 * 
-!*.cpp
-!Makefile
-/.vscode
