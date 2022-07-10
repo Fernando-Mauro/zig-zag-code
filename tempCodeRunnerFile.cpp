@@ -1,7 +1,2 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-int main(){
-
-}
+    bool isUpperFirst = isupper(first_node[apuntador]);
+      bool isUpperSecond = isupper(second_node[apuntador]);
