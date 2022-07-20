@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define MAXN 10010
+#define MAXN 1001
 #define MAXP 100
 #define MAXE 64
 typedef long double lld;
@@ -9,6 +9,7 @@ int N = 0, M = 0;
 bitset <MAXN> criba;
 lld primos[MAXP][MAXE];
 // lld DP[MAXN][MAXP];
+//  la dp es de 10k por 100 > 1millon de casillas
 vector <vector<lld>> DP(MAXN,vector <lld> (MAXP,-1));
 
 //Resuelve usando una DP
@@ -63,6 +64,6 @@ int main() {
     //         DP[i][j] = -1;
     //      }
     // }
-    cout << setprecision(0) << fixed << resolver(N, 0);
+    cout << setprecision(0) << fixed << resolver(N, 0) << endl;
     return 0;
 }
