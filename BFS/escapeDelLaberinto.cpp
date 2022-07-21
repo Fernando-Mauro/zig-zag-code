@@ -12,7 +12,7 @@ vector<int> changeColumnas = { 0, 1, 0, -1 };
 bool bandera = false;
 // y -> first
 // x -> second 
-bool DFS(vector <string> &laberinto, coordenadas actual, vector <vector <bool>> &visitados){
+bool DFS(vector <vector<char>> &laberinto, coordenadas actual){
    // explorar hacia arriba, abajo, derecha, izquierda
    if( laberinto[actual.first][actual.second] == 'S'){
       bandera = true;
@@ -24,17 +24,14 @@ bool DFS(vector <string> &laberinto, coordenadas actual, vector <vector <bool>> 
       nuevasCoordenadas.first = actual.first + changeFilas[i];
       nuevasCoordenadas.second = actual.second +  changeColumnas[i];
       if(nuevasCoordenadas.first < laberinto.size() && nuevasCoordenadas.second <laberinto[0].size() && nuevasCoordenadas.first >= 0 && nuevasCoordenadas.second >= 0){
-         if(!visitados[nuevasCoordenadas.first][nuevasCoordenadas.second]){
+         if(laberinto[nuevasCoordenadas.first][nuevasCoordenadas.second] != '#'){
             if(laberinto[nuevasCoordenadas.first][nuevasCoordenadas.second] == 'S'){
                bandera = true;
                break;
             }
-            if(laberinto[nuevasCoordenadas.first][nuevasCoordenadas.second] == '#'){
-               continue;
-            }
             if(laberinto[nuevasCoordenadas.first][nuevasCoordenadas.second] == ' '){
-               visitados[nuevasCoordenadas.first][nuevasCoordenadas.second] = true;
-               DFS(laberinto, nuevasCoordenadas, visitados);
+               laberinto[nuevasCoordenadas.first][nuevasCoordenadas.second] = '#';
+               DFS(laberinto, nuevasCoordenadas);
             }
          }
       }
@@ -45,24 +42,21 @@ int main(){
    ios_base::sync_with_stdio(false);
    int filas, columnas;
    cin >> filas >> columnas;
-   vector <string> laberinto(filas);
-   vector <vector <bool>> visitados(filas, vector <bool> (columnas, false));
+   vector <vector<char>> laberinto(filas, vector <char> (columnas));
    cin.ignore();
-   for(int i = 0; i < filas; ++i){
-      getline(cin, laberinto[i]);
-   }
+   string aux;
    coordenadas entrada;
-   coordenadas salida;
    for(int i = 0; i < filas; ++i){
-      for(int j = 0; j < columnas; ++j){ 
-         if(laberinto[i][j] == 'E') entrada = {i,j};
-         if(laberinto[i][j] == 'S') salida = {i,j};
-      } 
+      getline(cin, aux);
+      for(int j = 0; j < aux.size(); j++){
+         laberinto[i][j] = aux[j];
+         if(aux[j] == 'E') entrada = {i,j};
+      }
    }
    // cout << entrada.first << entrada.second << endl;
    // cout << salida.first << salida.second << endl;
    coordenadas actual = entrada;
-   DFS(laberinto, actual, visitados);
+   DFS(laberinto, actual);
    if(bandera) cout << "SI" << endl;
    else cout << "NO" << endl;
    return 0;
