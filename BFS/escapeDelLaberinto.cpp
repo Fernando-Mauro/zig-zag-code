@@ -38,13 +38,9 @@ int main() {
 
   Matriz laberinto = Matriz(filas, vector<char>(columnas, ' '));
   Matriz solucion = Matriz(filas, vector<char>(columnas, ' '));
-  
-  for (int i=0; i<filas; i++) {
-    string s;
-    getline(cin,s);
-    for (int j=0; j<s.size(); j++) {
-      laberinto[i][j] = s[j];
-    }
+  vector <string> laberintonuevo;
+  for(int i = 0; i < filas; i++){
+    getline(cin,laberintonuevo[i]);
   }
 
   bool tieneSalida = false;
