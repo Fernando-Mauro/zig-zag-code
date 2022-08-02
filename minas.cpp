@@ -1,20 +1,17 @@
 // https://omegaup.com/arena/problem/Minas/
-/* solucion que da 92 puntos con tiempo limite excedido" */
-#include <iostream>
-#include <vector>
-using namespace std;
+/* solucion que da 100 puntos B)" */
+#include <cstdio>
 
 int main(){
-    cin.tie(nullptr);
-    ios_base::sync_with_stdio(false);
     int n, m;
-    cin >> n >> m;
+    scanf("%d%d", &n, &m);
     char aux;
     for(int i = 0; i< n; ++i){
         for(int j = 0; j < m ; ++j){
-            cin >> aux; 
+            scanf(" %c", &aux); 
             if(aux == '*'){
-               cout << i + 1 << " " << j + 1 << endl;
+               printf("%d ",i + 1);
+               printf("%d\n", j + 1);
             }
         }
     }
