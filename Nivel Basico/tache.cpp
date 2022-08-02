@@ -1,3 +1,4 @@
+// https://omegaup.com/arena/problem/dibujando-un-tache
 #include <iostream>
 
 using namespace std;

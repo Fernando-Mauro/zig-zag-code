@@ -17,7 +17,7 @@ int main(){
    cout <<recorrerMetros(tiempos, segundos, metros) + banderazo;
    return 0;
 }
-a
+
 int recorrerMetros(vector <int> &tiempos, int segundos, int metros){
    int total = 0;
    int segundosRecorridos = 0;

@@ -1,3 +1,4 @@
+// https://omegaup.com/arena/problem/ofmi-2022-subasta/
 #include <iostream>
 
 using namespace std;
