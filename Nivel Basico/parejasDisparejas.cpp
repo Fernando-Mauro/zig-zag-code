@@ -5,27 +5,26 @@ using namespace std;
 
 long long int suma(int n){
    long long int total = 0;
-   for(int i = 2; i < (n / 2) + 1; ++i){
+   for(int i = 1; i < n; ++i){
       if(n % i == 0){
          total += i;
       }
    }
-   return total + 1;
+   return total;
 }
-int comprobar(long long int totaln, long long int totalm, int n, int m){
-   if(totalm == n && totaln == m){
+int comprobar(int n, int m){
+   if(suma(m) == n && suma(n) == m){
       cout << 0 << " ";
       return 0;
-   }
-   if(totalm <= n && totaln <= m){
+   }else if(suma(m) <= n && suma(n) <= m){
       cout << 1 <<" ";
       return 0;
-   }
-   if(totalm >= n && totaln >= m){
+   }else if(suma(m) > n && suma(n) > m){
       cout << 2 << " ";
       return 0;
+   }else {
+      cout << 3 << " ";
    }
-   cout << 3 << " ";
    return 0;
 }
 int main(){
@@ -34,8 +33,8 @@ int main(){
    cin >> m;
    long long int totaln = suma(n);
    long long int totalm = suma(m);
-   comprobar(totaln, totalm, n, m);
-   comprobar(totaln, totaln, n, n);
-   comprobar(totalm, totalm, m,m);
+   comprobar(n, m);
+   comprobar(n, n);
+   comprobar(m,m);
    return 0;
 }
