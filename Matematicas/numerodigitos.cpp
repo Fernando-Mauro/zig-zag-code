@@ -1,3 +1,4 @@
+// https://omegaup.com/arena/problem/numdig
 #include <bits/stdc++.h>
 
 using namespace std;

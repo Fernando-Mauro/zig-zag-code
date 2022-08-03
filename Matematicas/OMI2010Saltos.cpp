@@ -1,4 +1,4 @@
-//https://omegaup.com/arena/problem/L--OMI2010-Saltos/#problems
+//https://omegaup.com/arena/problem/L--OMI2010-Saltos/
 #include <iostream>
 
 using namespace std;
