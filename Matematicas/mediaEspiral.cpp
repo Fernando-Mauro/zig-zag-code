@@ -1,3 +1,4 @@
+// https://omegaup.com/arena/problem/Numeros-en-media-espiral/
 #include <iostream>
 
 using namespace std;
