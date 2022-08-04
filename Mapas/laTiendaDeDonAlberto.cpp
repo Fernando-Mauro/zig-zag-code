@@ -1,3 +1,4 @@
+// https://omegaup.com/arena/problem/La-Tiendita-de-don-Alberto//
 #include <bits/stdc++.h>
 
 using namespace std;
