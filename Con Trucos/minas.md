@@ -58,4 +58,4 @@ Al analizar por un momento el problema nos damos cuenta de que se puede resolver
 
 De esta manera podriamos pensar que el problema queda resuelto, pero veamos que sucede al enviar este codigo:
  
-![Imagen del veredicto del envio](https://www.dropbox.com/s/9qrc2aq4moiew5l/Screenshot%20from%202022-08-05%2014-04-41.png?dl=0)
+<img src="https://drive.google.com/uc?export=view&id=1Pyq57vn2G4J_ZHw3xe0aPl9oOjLIkVAf">
