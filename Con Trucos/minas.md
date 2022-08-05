@@ -5,7 +5,27 @@ Dado _n_ * _m_ caracteres (o una matriz de _n_ * _m_) debemos indicar en donde s
 Veamos el siguiente ejemplo: 
 <table style="width:100%; text-align:center;">
    <tr>
-      <td style="width:50%">Primera columna</td>
-      <td style="width:50%">Primera columna</td>
+      <td style="width:50%">Entrada</td>
+      <td style="width:50%">Salida</td>
+   </tr>
+   <tr>
+      <td style="width:50%">
+         5 3 <br>
+         +++ <br>
+         *+* <br>
+         ++* <br>
+         *** <br>
+         +** <br>
+      </td>
+      <td style="width:50%">
+         2 1 <br>
+         2 3 <br>   
+         3 3 <br> 
+         4 1 <br>
+         4 2 <br>     
+         4 3 <br>     
+         5 2 <br>     
+         5 3 <br>     
+      </td>
    </tr>
 </table>
