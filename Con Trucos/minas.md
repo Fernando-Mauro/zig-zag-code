@@ -29,3 +29,5 @@ Veamos el siguiente ejemplo:
       </td>
    </tr>
 </table>
+En este ejemplo podemos ver que nos dan una matiz de 5 filas por 3 columnas. En la salida estan las posiciones de todas las minas en la matriz. <br>
+> Notese que la esquina superior izquierda de la matriz es __1,1__.
