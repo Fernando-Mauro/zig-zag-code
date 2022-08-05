@@ -1,2 +1,0 @@
-# OmegaUp
-OmegaUp Problems 
