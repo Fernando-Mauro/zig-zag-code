@@ -96,7 +96,7 @@ int main(){
 
 ```
 
-![Veredicto]("https://drive.google.com/uc?export=view&id=13SCdWobPlPqkct_R2as0GaCsEHkLW-Lz")
+![imagen](https://drive.google.com/uc?export=view&id=13SCdWobPlPqkct_R2as0GaCsEHkLW-Lz)
 
 Comov vemos el tiempo ha bajado considerablemente pero no lo suficiente, cin y cout con la optimizacion anterior se vuelven mas rapidos, pero jamas al nivel de `printf` y `scanf`, asi que utilizemoslos: <br>
 ```cpp
