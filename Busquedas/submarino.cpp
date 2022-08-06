@@ -3,36 +3,48 @@
 
 using namespace std;
 
-bool DFS(map <int, vector <int>> &cuartos, auto it, int salida){
-   for(int i = 0; i < it.second.size(); ++i){
-      if(it.second[i] == salida){
-         return true;
-      }
-   }
-   return 0;
+void BFS(){
+
 }
 
 int main(){
    cin.tie(nullptr);
    ios_base::sync_with_stdio(false);
-   map <int, vector <int>>cuartos;
-   int n, e, tiempo;
-   cin >> n >> e >> tiempo;
-   int a, b;
+   int n, m, tiempoMaximo;
+   cin >> n >> m >> tiempoMaximo;
+   vector <vector <bool>> conexiones(n + 1, vector <bool> (n + 1, false));
    int salida = n;
-   while(e--){
+   int a,b;
+   while(m--){
       cin >> a >> b;
-      auto it = cuartos.find(a);
-      if(it != cuartos.end()){
-         cuartos[a].push_back(b);
-      }else{
-         cuartos.insert({a, vector <int> (1,b)});
-      }
+      conexiones[a][b] = true;
+      conexiones[b][a] = true;
    }
-   for(const auto &it : cuartos){
-      if(DFS(cuartos,it,salida)){
-         cout << "Salida";
+   queue <int> cola;
+   cola.push(salida);
+   set <int> visitados;
+   visitados.insert(salida);
+   int tiempoActual = 0, marineros = 0;
+   while(!cola.empty() && tiempoActual <( tiempoMaximo - 1)){
+      int contador = 0;
+      int maximo = cola.size();
+      while(contador < maximo){
+         int nodo = cola.front();
+         cola.pop();
+         // marcarlo como visitado
+         visitados.insert(nodo);
+         // agregar vecinos del nodo a la cola
+         for(int i = 0; i < n; ++i){
+            if(conexiones[nodo][i] && visitados.find(i) == visitados.end()){
+               visitados.insert(i);
+               cola.push(i);
+               marineros++;
+            }
+         }
+         contador++;
       }
+      tiempoActual++;
    }
+   cout << marineros << endl;
    return 0;
 }
