@@ -22,9 +22,9 @@ Tu programa debe escribir en la pantalla un único número entero que representa
 
 ### **Restricciones**
 
-*1 < N $\leq$ 2,000,000*
+*1 < N <= 2,000,000*
 
-*0 $\leq$ M $\leq$ $10^9$*
+*0 <= M <= $10^9$*
 
 ### **Ejemplo**
 
