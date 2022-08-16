@@ -37,28 +37,28 @@ Tu programa debe escribir en la pantalla un único número entero que representa
 1. Solución fácil:
    * A simple vista podríamos considerar guardar todos los números en un arreglo y después de almacenarlos ordenarlos, una vez ordenados buscar el numero dentro de el arreglo, (búsqueda linear, binaria, etc...). Quedaría mas o menos asi:
       ```cpp
-         #include <iostream>
-         #include <vector>
-         #include <algorithm>
+      #include <iostream>
+      #include <vector>
+      #include <algorithm>
 
-         using namespace std;
+      using namespace std;
 
-         int main(){
-            long long n; 
-            cin >> n;
-            vector <long long> numeros(n);
-            for(int i = 0; i < n; i++){
-               cin >> numeros[i];
-            }
-            long auxiliar = numeros[0];
-            sort(numeros.begin(), numeros.end());
-            for(int i = 0; i < n; i++){
-               if(numeros[i] == auxiliar){
-                  cout << i ;
-                  break;
-               }
+      int main(){
+         long long n; 
+         cin >> n;
+         vector <long long> numeros(n);
+         for(int i = 0; i < n; i++){
+            cin >> numeros[i];
+         }
+         long auxiliar = numeros[0];
+         sort(numeros.begin(), numeros.end());
+         for(int i = 0; i < n; i++){
+            if(numeros[i] == auxiliar){
+               cout << i ;
+               break;
             }
          }
+      }
       ```
       Con esta solución obtendríamos un puntaje parcial ya que guardar todos los elementos, y posteriormente ordenarlos nos toma mucho tiempo y ademas mucha memoria.
    
@@ -66,28 +66,28 @@ Tu programa debe escribir en la pantalla un único número entero que representa
    * SI analizamos un poco mas el problema podremos llegar a la conclusion de que solo necesitamos contar cuantos elementos del arreglo son menores que el elemento $a_0$, asi podremos darnos cuanta que con un while y un if quedaría el problema resulto, como se muestra a continuación: 
       ```cpp
          // https://omegaup.com/arena/problem/AcomodandoOMI/
-         #include <bits/stdc++.h>
+      #include <bits/stdc++.h>
 
-         using namespace std;
+      using namespace std;
 
-         int main(){
-            cin.tie(nullptr);
-            ios_base::sync_with_stdio(false);
-            int n;
-            cin >> n;
-            int numero;
-            cin >> numero;
-            int aux;
-            int pos = 0;
-            //Le quitamos 1 a n porque ya guardamos el numero en la posicion 0
-            n -= 1;
-            while(n--){
-               cin >> aux;
-               if(aux < numero) pos++;
-            }
-            cout << pos << endl;
-            return 0;
+      int main(){
+         cin.tie(nullptr);
+         ios_base::sync_with_stdio(false);
+         int n;
+         cin >> n;
+         int numero;
+         cin >> numero;
+         int aux;
+         int pos = 0;
+         //Le quitamos 1 a n porque ya guardamos el numero en la posicion 0
+         n -= 1;
+         while(n--){
+            cin >> aux;
+            if(aux < numero) pos++;
          }
+         cout << pos << endl;
+         return 0;
+      }
       ```
       Con esta optimización el problema ocuparía menos memoria y tiempo, asi obtendríamos los 100 puntos al enviar nuestra solución 😀
 
