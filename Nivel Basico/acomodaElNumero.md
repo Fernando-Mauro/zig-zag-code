@@ -31,7 +31,7 @@ _1 < N $\leq$ 2,000,000_
 
 | Entrada | Salida | Descripción |
 | --- | --- | --- |
-| 5 <br> 14 2 1 17 23  | Recuerda que las posiciones de la lista se cuentan a partir de **0** . La lista ordenada queda **1,2,14,17,23**, de modo que **14**, que era el primer elemento en la lista desordenada, quedó en la posición **2**. |
+| 5 <br> 14 2 1 17 23  | 2 | Recuerda que las posiciones de la lista se cuentan a partir de **0** . La lista ordenada queda **1,2,14,17,23**, de modo que **14**, que era el primer elemento en la lista desordenada, quedó en la posición **2**. |
 
 ## **Solución**
 
