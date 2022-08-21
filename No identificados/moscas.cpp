@@ -1,56 +1,38 @@
+// https://omegaup.com/arena/problem/moscas
 #include <bits/stdc++.h>
 
 using namespace std;
 
-struct rangos{
-   int inicio;
-   int final;
-};
-
-void vaciarCola(queue <rangos> &maximos){
-   while(!maximos.empty()){
-      maximos.pop();
-   }
-}
 int main(){
    cin.tie(nullptr);
    ios_base::sync_with_stdio(false);
-   int n;
-   // arreglo con el numero maximo de tiempo de vida de las moscas
    vector <int> moscas(60000);
+   int n;
    cin >> n;
-   int inicio, final;
-   int maximo = INT_MIN;
+   int inicio, final, maximaMuerte = 0, maximaVida = 0;
    while(n--){
       cin >> inicio >> final;
-      for(; inicio <= final; ++inicio){
+      while(inicio <= final){
          moscas[inicio]++;
-         maximo = max(moscas[inicio], maximo);
+         maximaMuerte = max(maximaMuerte, inicio);
+         maximaVida = max(maximaVida, moscas[inicio]);
+         inicio++;
       }
    }
-   int inicioIntervalo = 0;
-   int finalIntervalo = 0;
-   queue <pair<int,int>> rangos;
-   for(int i = 0; i < 60000; ++i){ 
-      if(moscas[i] == maximo){
-         inicioIntervalo = i;
-         finalIntervalo= 1;
-         i++;
-         while(moscas[i] == maximo){
-            finalIntervalo++;
+   cout << maximaVida << endl;
+   int inicioRango, finalRango;
+   for(int i = 0; i <= maximaMuerte; ++i){ 
+      if(moscas[i] == maximaVida){
+         inicioRango = i, finalRango = i;
+         ++i;
+         while(moscas[i] == maximaVida){
+            ++finalRango;
             ++i;
          }
-         if(finalIntervalo != 1){
-            i -= 1;
-            rangos.push({inicioIntervalo, i});
+         if(inicioRango != finalRango){
+            cout << inicioRango << " " << finalRango << endl;
          }
       }
-      // cout << moscas[i] << " ";
-   }
-   cout << rangos.size() << endl;
-   while(!rangos.empty()){
-      cout << rangos.front().first << " " << rangos.front().second << endl;
-      rangos.pop();
    }
    return 0;
 }
