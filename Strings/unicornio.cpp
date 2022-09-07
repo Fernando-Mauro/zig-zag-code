@@ -20,7 +20,8 @@ string unicornio = "unicornio";
 
 void comprobar(string &cadena){
    if(cadena.size() < 9) {
-      cout << -0;
+      int resultado = cadena.size() - 9;
+      cout << resultado;
       return;
    }
    for(int i = 0; i < unicornio.size(); ++i){
