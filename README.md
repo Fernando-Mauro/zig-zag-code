@@ -1,5 +1,7 @@
 # Zig-Zag repository
 
+[![OmegaUp](https://img.shields.io/badge/OmegaUp-5%2B-blue?style=for-the-badge&logoColor=white&labelColor=101010)](https://omegaup.com/)
+
 [Español](#spanish)
 
 [English](#english)
