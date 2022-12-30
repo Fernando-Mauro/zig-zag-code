@@ -1,5 +1,9 @@
 ## **Minas**
 ### [Link al problema](https://omegaup.com/arena/problem/minas) <br>
+
+## [Video explicando como resolver el problema](https://youtu.be/LobQdUyMgug) 
+![](https://img.shields.io/youtube/views/LobQdUyMgug?style=social)
+
 Este problema es muy interesante, a simple vista es muy sencillo, el objetivo es el siguiente: <br>
 Dado _n_ * _m_ caracteres (o una matriz de _n_ * _m_) debemos indicar en donde se encuentran minas, una mina esta representada por un __*__ y una porción de tierra esta representada por un __+__. <br>
 Veamos el siguiente ejemplo: 

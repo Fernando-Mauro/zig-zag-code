@@ -1,17 +1,19 @@
 // https://omegaup.com/arena/problem/Minas/
-/* solucion que da 100 puntos B)" */
-#include <cstdio>
+// 100% 😎
+#include <bits/stdc++.h>
+
+using namespace std;
 
 int main(){
     int n, m;
     scanf("%d%d", &n, &m);
-    char aux;
-    for(int i = 0; i< n; ++i){
-        for(int j = 0; j < m ; ++j){
-            scanf(" %c", &aux); 
-            if(aux == '*'){
-               printf("%d ",i + 1);
-               printf("%d\n", j + 1);
+    char auxiliar;
+    for(int i = 0; i < n; ++i){ 
+        for(int j = 0; j < m; ++j){ 
+            scanf(" %c", &auxiliar);
+            if(auxiliar == '*'){
+                printf("%d", i + 1);
+                printf(" %d\n", j + 1);
             }
         }
     }
