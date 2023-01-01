@@ -2,4 +2,4 @@
 !*.java
 *.class
 ejecutable
-.vscode
+/.vscode
