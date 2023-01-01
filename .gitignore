@@ -1,5 +1,9 @@
-!*.cpp
-!*.java
-*.class
 ejecutable
-/.vscode
+.vscode
+temp.cpp
+*.txt
+*.txt
+*.out
+*.in
+/*/.vscode
+task.json
