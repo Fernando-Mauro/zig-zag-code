@@ -1,9 +1,2 @@
-ejecutable
-.vscode
-temp.cpp
-*.txt
-*.out
-*.in
-/*/.vscode
-task.json
-*.class
+!*.cpp
+!*.java
