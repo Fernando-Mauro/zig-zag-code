@@ -6,3 +6,4 @@ temp.cpp
 *.in
 /*/.vscode
 task.json
+*.class
