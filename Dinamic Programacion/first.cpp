@@ -9,31 +9,26 @@
 
 using namespace std;
 
-struct nodo{
-   int suma_actual;
-   int cantidad;
-   int posicion;
-};
+int minimo = INT_MAX;
 
-int solve(vector <int> &numeros, int &objetivo, nodo &actual){
-   if(actual.suma_actual == objetivo) return actual.cantidad;
-   if(actual.posicion > numeros.size()) return 0;
-   solve(numeros,objetivo,)
+int solve(vector <int> &numeros, int objetivo, int indice, int sumaActual, int elementos){
+   if(sumaActual == objetivo) minimo = min(minimo, elementos);
+   
+   if(indice > numeros.size()) return 0;
+
+   solve(numeros, objetivo, indice + 1, sumaActual + numeros[indice], elementos + 1);
+
+   solve(numeros, objetivo, indice + 1, sumaActual, elementos);
 }
 
 int main(){
    cin.tie(nullptr);
    ios_base::sync_with_stdio(false);
-   int n;
-   scanf("%d", &n);
-
-   vector <int> numeros(n);
-   for(int i = 0; i < n; ++i) scanf("%d", &numeros[i]);
-
-   int objetivo;
-   cin >> objetivo;
-
-   nodo inicial = {0,0,0};
-   cout << solve(numeros, objetivo, inicial);
+   
+   vector <int> numeros = {2,1,8,13,5,7,5};
+   int k = 11;
+   
+   solve(numeros, k, 0, 0, 0);
+   cout << minimo << endl;
    return 0;
 }
