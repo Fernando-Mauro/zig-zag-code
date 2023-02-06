@@ -7,3 +7,4 @@ temp.cpp
 *.in
 /*/.vscode
 task.json
+*.exe
