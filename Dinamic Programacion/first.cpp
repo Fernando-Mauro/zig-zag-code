@@ -11,14 +11,31 @@ using namespace std;
 
 int minimo = INT_MAX;
 
+struct nodo{
+   int suma;
+   int elementos;
+};
+map <int, vector <int>> soluciones;
+
 int solve(vector <int> &numeros, int objetivo, int indice, int sumaActual, int elementos){
    if(sumaActual == objetivo) minimo = min(minimo, elementos);
    
    if(indice > numeros.size()) return 0;
 
-   solve(numeros, objetivo, indice + 1, sumaActual + numeros[indice], elementos + 1);
+   if(soluciones.find(elementos + 1) != soluciones.end()){
+      const auto sumas = soluciones.find(elementos + 1);      
+      bool bandera = false;
+      for(auto &i : sumas -> second){
+         if(i == (sumaActual + numeros[indice])){
+            minimo = min(minimo, elementos + 1);
+            bandera = true;
+         }
+      }
+      if(!bandera){
+         solve(numeros, objetivo, indice + 1, sumaActual + numeros[indice], elementos + 1);
+      }   
+   }
 
-   solve(numeros, objetivo, indice + 1, sumaActual, elementos);
 }
 
 int main(){
