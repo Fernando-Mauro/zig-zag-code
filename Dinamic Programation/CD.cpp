@@ -2,29 +2,40 @@
 
 using namespace std;
 
-int min = INT_MIN;
-int max = INT_MAX;
-int solve(int &objective, vector <int> &numbers, int suma, int indice){
-    if(suma == objective){
-        return suma;
-    }
-    if(indice > (numbers.size() - 1)){
-        return 0;
-    }
-    return min(abs(objetivo - solve()))
-}
-int main(){
-    cin.tie(nullptr);
-    ios_base::sync_with_stdio(false);
-    int objective;
-    while(cin >> objective){
-        int n;
-        cin >> n;
-        vector <int> numbers(n);
-        for(auto &it : numbers){
-            cin >> it;  
+void solve(vector<int>& arreglo, int objetivo, int suma_actual, int index, vector<int>& elementos_actuales, vector<int>& mejor_combinacion) {
+    if (index == arreglo.size()) { 
+        if (((objetivo - suma_actual) >= 0) && abs(objetivo - suma_actual) < abs(objetivo - mejor_combinacion[0])) {
+            mejor_combinacion[0] = suma_actual;
+            mejor_combinacion.erase(mejor_combinacion.begin() + 1, mejor_combinacion.end());
+            mejor_combinacion.insert(mejor_combinacion.end(), elementos_actuales.begin(), elementos_actuales.end());
         }
-        cout << solve(objective, numbers,0, 0);
+        return;
+    }
+    elementos_actuales.push_back(arreglo[index]);
+    solve(arreglo, objetivo, suma_actual + arreglo[index], index + 1, elementos_actuales, mejor_combinacion);
+    elementos_actuales.pop_back();
+    solve(arreglo, objetivo, suma_actual, index + 1, elementos_actuales, mejor_combinacion);
+}
+
+int main() {
+    int objetivo;
+    while(cin >> objetivo){
+            int n;
+            cin >> n;
+            vector<int> arreglo(n);
+
+            for (int i = 0; i < n; i++) {
+                cin >> arreglo[i];
+            }
+
+            vector<int> elementos_actuales;
+            vector<int> mejor_combinacion = { INT_MAX };
+
+            solve(arreglo, objetivo, 0, 0, elementos_actuales, mejor_combinacion);
+            for (int i = 1; i < mejor_combinacion.size(); i++) {
+                cout << mejor_combinacion[i] << " ";
+            }
+            cout << "sum:" << mejor_combinacion[0] << "\n";
     }
     return 0;
 }
