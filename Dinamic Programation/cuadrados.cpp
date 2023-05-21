@@ -1,29 +1,42 @@
 #include <bits/stdc++.h>
 
+const int INVALIDO = -1;
+
 using namespace std;
 
-int solve(int &number){
-    int count = 0; 
-    int raiz = sqrt(number);
-    for(int i = raiz; i >= 1 && number > 0; --i ){
-        if(number - pow(i,2) >= 0){
-            number -= pow(i,2);
-            count++;
-            i++;
-        }
+int memo[10001];
 
+int solve(int n){
+    if (n <= 0){
+        return 0;
     }
-    return count;
+    if (n == 1){
+        return 1;
+    }
+    if (memo[n] != INVALIDO){
+        return memo[n];
+    }
+
+    int limite = sqrt(n);
+    int contador = INT32_MAX;
+    for (int i = 1; i <= limite; ++i){
+        contador = min(contador, solve(n - i * i) + 1);
+    }
+    memo[n] = contador;
+    return contador;
 }
-int main(){
-    cin.tie(nullptr);
-    ios_base::sync_with_stdio(false);
-    int n;
-    scanf("%d", &n);
-    while(n--){
-        int caso;
-        scanf("%d", &caso);
-        printf("%d\n",solve(caso));
+
+int main()
+{
+    int casos;
+    cin >> casos;
+    memset(memo, INVALIDO, sizeof(memo));
+    while (casos--)
+    {
+        int n;
+        cin >> n;
+        cout << solve(n) << "\n";
     }
+
     return 0;
 }
