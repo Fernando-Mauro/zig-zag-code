@@ -1,6 +1,5 @@
 *
-!*.py
-!*.java
-!*.cpp
-!Readme.md
-!*.md
+!/*/*.py
+!/*/*.java
+!/*/*.cpp
+!/*/*.md
