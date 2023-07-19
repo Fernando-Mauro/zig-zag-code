@@ -8,6 +8,6 @@ int main(){
     ios_base::sync_with_stdio(false);
     char s [100];
     scanf("%[^\n]%*c", s);
-    printf("Thank you, %s ,and farewell!\n", s);
+    printf("Thank you, %s, and farewell!\n", s);
     return 0;
 }
