@@ -31,7 +31,7 @@ i64 stringDecimal(){
         suma += (value * pow(26, power));
         power++;
     }
-    return suma;
+    return (suma - 1) + 1LL;
 }
 
 int main(){
