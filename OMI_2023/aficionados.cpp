@@ -41,7 +41,7 @@ int main(){
     int current, last = -1, beforeLast = -1, start, end;
     
     for(int i = 0; i < n; ++i){
-        scanf("%d", current);
+        scanf("%d", &current);
         if(current == last){
             start = i - 1;
             end = i;
