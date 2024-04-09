@@ -1,48 +1,31 @@
 // https://omegaup.com/arena/problem/abm/
 #include <iostream>
 
+
 using namespace std;
 
-int diasActual(int anio, int mes, int dia){
-    int diasTotales = 0;
-   if(anio % 5 == 0){
-      if(mes > 2){
-         diasTotales = (mes - 2) * 57;
-         diasTotales += 58;
-         diasTotales += dia;         
-      }else if(mes == 2){
-         diasTotales = 57 + dia;
-      }else if(mes == 1){
-         diasTotales = dia;
-      }
-   }else{
-       if(mes > 2){
-         diasTotales = (mes - 2) * 57;
-         diasTotales += 59;
-         diasTotales += dia;         
-      }else if(mes == 2){
-         diasTotales = 57 + dia;
-      }else if(mes == 1){
-         diasTotales = dia;
-      }
-   }
-   return diasTotales;
-}
+const int diasPorAnio = 686;
+const int diasPorMes = 57;
+const int anioInicial = 2001;
+
 int main(){
-   const int diasAnioBisiesto = (11 * 57) + 58;
-   const int diasAnioNormal = (11 * 57) + 59;
-   int dia,mes, anio, total = 0;
-   cin >> dia >> mes >> anio;
-   int anospasados = (anio - 1) - 2000;
-   int anosbisiestos = anospasados / 5;
-   // cout << "Anos bisiestos:" << anosbisiestos << endl;
-   int anosnormales = anospasados - anosbisiestos;
-   // cout << "anos normales: " << anosnormales << endl;
-   int diasactuales = diasActual(anio,mes,dia);
-   // cout << "Dias del anio actual: " << diasactuales;
-   total = (anosbisiestos * diasAnioBisiesto) + (anosnormales * diasAnioNormal) + diasactuales;
-   // cout << endl << "Los dias totales pasados son: " << total;
-   int numero = total % 7 == 0 ? 7 : total % 7;
-   cout << numero << endl;
+   int anioFinal, mesFinal, diaFinal;
+   cin >> diaFinal >> mesFinal >> anioFinal;
+   int aniosTranscurridos = ((anioFinal) - anioInicial);
+
+   int aniosBisiestosTranscurridos = aniosTranscurridos / 5;
+   int diasTranscurridosDelAnioActual = 0;
+
+   if(mesFinal > 2){
+      diasTranscurridosDelAnioActual = (57 * (mesFinal - 2));
+      
+      diasTranscurridosDelAnioActual += (anioFinal % 5 == 0) ? 58 : 59;
+   }else if(mesFinal == 2){
+      diasTranscurridosDelAnioActual = 57;
+   }
+
+   int diasTotales = (aniosBisiestosTranscurridos * 685) + ((aniosTranscurridos - aniosBisiestosTranscurridos) * 686) + diasTranscurridosDelAnioActual + diaFinal;
+   
+   cout << ((diasTotales % 7 == 0) ? 7 : (diasTotales % 7));
    return 0;
 }
