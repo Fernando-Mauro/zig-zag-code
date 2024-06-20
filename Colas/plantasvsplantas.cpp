@@ -2,44 +2,52 @@
 
 using namespace std;
 
-set <int> dead;
+typedef long long int i64;
+ 
+i64 t = 0;
 
-struct plant{
-    int size;
-    int neighboord;
-
-    bool operator<(const plant otherPlant)const{
-        if(this->size == otherPlant.size)
-            return true;
-        else
-            return this->size > otherPlant.size;
-    }
+struct Food{
+    i64 size;
+    i64 time;
 };
 
-priority_queue <plant> plants;
+void solve(vector <i64> &plants){
+    
+    stack <Food> stackPlants;
+    for(int i = (plants.size() - 1); i >= 0; --i){
+        Food newPlant = {
+            plants[i],
+            0
+        };
+
+        while(!stackPlants.empty() && stackPlants.top().size < newPlant.size){
+            Food current = stackPlants.top();
+            stackPlants.pop();
+            if(current.time == newPlant.time)
+                newPlant.time++;
+            else
+                newPlant.time = max(current.time, newPlant.time);
+            t = max(t, newPlant.time);
+        }
+        stackPlants.push(newPlant);
+    }
+}
 
 int main(){
-    cin.tie(nullptr);
-    ios_base::sync_with_stdio(false);
-
+    std::cin.tie(nullptr);
+    std::ios_base::sync_with_stdio(false);
     int n;
+    
     cin >> n;
 
-    int current, last = -1;
-    while(n--){
-        cin >> current;
+    vector <i64> plants(n);
+    for(int i = 0; i < n; ++i){
 
-        if(last != -1){
-            plants.push({last, current});
-        }
-        last = current;
+        cin >> plants[i];
     }
-    plants.push({current, -1});
-    
-    while(!plants.empty()){
-        cout << plants.top().size << " " << plants.top().neighboord << endl;
-        plants.pop();
-    }
-    
+
+    solve(plants);
+    cout << t << endl;
+
     return 0;
 }
