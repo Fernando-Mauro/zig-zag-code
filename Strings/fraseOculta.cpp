@@ -5,7 +5,7 @@ using namespace std;
 int descifrar(int submulti, string frase){
     vector <int> sumas(submulti);
 
-    for(int i = 0; i <= submulti; ++i){
+    for(int i = 0; i < submulti; ++i){
         for(int j = i; j < frase.size(); j += submulti){
             char upper = toupper(frase[j]);
             sumas[i] += upper - 64;

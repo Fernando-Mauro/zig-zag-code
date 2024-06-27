@@ -23,10 +23,6 @@ int busquedaBinaria(vector <int> &numeros, int n){
     return -1;
 }
 
-// 9 6 7 4 1 2 5
-// 3 -> NO
-// 2 -> SI
-
 int main(){
     cin.tie(nullptr);
     ios_base::sync_with_stdio(false);
@@ -43,7 +39,7 @@ int main(){
 
     int q;
     cin >> q;
-    cout << busquedaBinaria(numeros, q) << "\n";
+    cout << busquedaBinaria(numeros, q) + 1 << "\n";
 
     return 0;
 }

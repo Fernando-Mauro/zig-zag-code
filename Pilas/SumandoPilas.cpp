@@ -3,9 +3,11 @@
 
 using namespace std;
 stack <int> pila;
+
 void agrega(int n){
    pila.push(n);
 }
+
 void consume(){
    int suma = 0;
    suma += pila.top();
@@ -20,10 +22,14 @@ void imprimir (){
 int main(){
    int instrucciones = 0;
    cin >> instrucciones;
+
    string cadena;
    int aux = 0;
+   
    while(instrucciones--){
+      // AGREGA 1
       cin >> cadena;
+
       if(cadena == "AGREGA"){
          cin >> aux;
          agrega(aux);
@@ -33,5 +39,6 @@ int main(){
          imprimir();
       }
    }
+   
    return 0;
 }
