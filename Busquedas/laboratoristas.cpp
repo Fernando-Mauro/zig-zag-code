@@ -2,22 +2,41 @@
 
 using namespace std;
 
-unordered_set <int> served;
+typedef long long int i64;
 
-int minStudent, maxStudent;
+// El desfase de traduce como ¿Cuantos de agregaron al principio o en que posicion fue a dar el que estaba en el inicio?
+i64 desfase = 0;
+i64 minStudent = 0;
+i64 maxStudent;
+i64 n;
 
-vector <int> students;
-vector <int> desfase;
+vector <long long int> students;
 
-int binarySearch(int studentNumber){
-    int start = 0;
-    int end = students.size() - 1;
-    int middle;
+string binarySearch(i64 studentNumber){
+    if(students[minStudent] > studentNumber || students[maxStudent] < studentNumber)
+        return "No Laurencio";
+
+    i64 start = minStudent;
+    i64 end = maxStudent;
+    i64 middle;
     
     while(start <= end){
         middle = start + (end - start) / 2;
-        if(students[middle] == studentNumber)
-            return middle;
+        if(students[middle] == studentNumber){
+            // A el indice donde encontramoe el elemento
+            // Le vamos a restar el inicio 
+            // O en otras palabras vamos a corregir el desfase
+            // De los elementos que borramos al inicio
+            middle -= minStudent;
+            // Ahora solo hay que corregir con el desfase de movimientos
+            middle = (middle + desfase + 1) % n;
+            // Si despues del modulo obtuvimos un 0
+            // Es porque estamos hasta el final
+            if(middle == 0)
+                return to_string(n);
+            return to_string(middle);
+        }
+
         if(students[middle] > studentNumber){
             end = middle -1;
         }
@@ -25,63 +44,54 @@ int binarySearch(int studentNumber){
             start = middle + 1;
         }
     }
-    return -1;
 }
 
 
-void move(int pos){
-
-    for(int i = 0; i < desfase.size();++i){
-        desfase[i] -= (pos);
-    }
-}
-
-string laurencio(int studentNumber){
-    int pos = binarySearch(studentNumber);
-
-    
-    if(served.find(students[pos]) == served.end()){
-        return to_string(((pos += desfase[pos]) % students.size()) + 1);
-    }
-
-    // No se encontró el estudiante, ya fue atendido
-    return "No laurencio";
-}
-
-void fixedDesfase(int posDes){
-    for(int i = 0; i < students.size(); ++i){
-        if(posDes < ((i + desfase[i]) % students.size())){
-            desfase[i]--;
-        }
-    }
-}
-
-void remove(int pos){
-    int posDes = 0;
-    
+void move(i64 pos){
+    // Reducimos el tamaño del arreglo(no se hace dinamicamente porque
+    // el arreglo fisico nunca se modifica)
+    // Si el ultimo se va a mover al inicio
     if(pos == -1){
-        served.insert(students[minStudent]);
-        posDes = (minStudent + desfase[minStudent]) % students.size();
-        minStudent++;
+        // Entonces el desfase se aumenta en 1, ya que va haber 1 estudiante más al frente de la fila
+        // Hacemos modulo n, para que en caso de que el desfase se salga del rango de estudiantes no salgamos
+        // de los indices del array
+        desfase = (desfase + 1) % n;
     }else{
-        served.insert(students[maxStudent]);
-        posDes = (maxStudent + desfase[maxStudent]) % students.size();
-        maxStudent--;
+        // En caso de que el desfase sea negativo es porque ahora el primer estudiante se 
+        // tendra que ir al final
+        desfase -= 1;
+        if(desfase < 0)
+            desfase = (n - 1);
     }
+}
 
-    fixedDesfase(posDes);
+void remove(i64 pos){
+    n --;
+    // El array reduce de tamaño
+    if(pos == 1){
+        // Si atendimos al estudiante con el numero más grande
+        // entonces el index del ultimo estudiante se resta
+        maxStudent--;
+        // Si el desfase es diferente de 0 (osea que  hay al menos un estudiante al frente)
+        if(desfase != 0)
+            desfase--;
+        // Le restamos 1 porque eliminamos un estudiante del frente eso quiere decir que el desfase decrece
+    }else{
+        // Le aumento 1 al indice del minimo student
+        minStudent++;
+        // Si el desfase en este caso sobrepasa a n, le hacemos modulo n
+        // Podria pasar que m = 5 n = 5 esto quiere decir que el primer elemento 
+        // Estaba hasta el final
+        desfase %= n;
+    }
 }
 
 int main(){
     cin.tie(nullptr);
     ios_base::sync_with_stdio(false);
 
-    int n;
     cin >> n;
-
-    students.resize(n);
-    desfase.resize(n, 0);
-    
+    students.resize(n);    
 
     minStudent = 0;
     maxStudent = n - 1;
@@ -97,11 +107,11 @@ int main(){
         char opt;
         cin >> opt;
 
-        int pos;
+        i64 pos;
         cin >> pos;
         switch (opt){
             case 'M': move(pos); break;
-            case 'L': cout << laurencio(pos) << "\n"; break;
+            case 'L': cout << binarySearch(pos) << "\n"; break;
             case 'Q': remove(pos); break;
         }
     }
