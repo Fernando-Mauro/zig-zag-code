@@ -19,7 +19,7 @@ struct Familiar{
     i64 generation;
 };
 
-void solve(adjacency_list &family){
+void solve(unordered_map <int, vector <int>> &family){
     queue <Familiar> bfs;
     
     Familiar nodeRoot = {root, root, 1};
@@ -33,21 +33,18 @@ void solve(adjacency_list &family){
         if(current.father == karelFather)
             karelGeneration = current.generation;
 
+        sums[current.generation]++;
+        
         // Visit neighbords
         for(i64 i = 0; i < family[current.number].size(); ++i){
-            // Avoid loops in the father
+            
             if(family[current.number][i] == current.father)
-                continue;
-
-        
-            sums[current.generation + 1]++;
-
+                continue;    
 
             Familiar neighbord = {family[current.number][i], current.number, current.generation + 1};
             bfs.push(neighbord);
         }
     }
-
 }
 
 int main(){
@@ -58,18 +55,20 @@ int main(){
     cin >> n;
     cin >> karelFather;
 
-    adjacency_list family(n + 1, vector <i64> (0));
-    sums.resize(n + 1);
+    unordered_map <int, vector <int>> family;
+
+    sums.resize(n * 2,0);
+    
     // index in 1
     for(i64 i = 1; i <= n; ++i){
         i64 father;
-        cin >> father;
-        family[father].push_back(i);
-        
+        cin >> father;   
         if(i == father){
             root = i;
-        }
+        }else{
 
+        family[father].push_back(i);
+        }
     }
 
     solve(family);
