@@ -1,11 +1,12 @@
 #include <bits/stdc++.h> 
 
-#define MAX 100000
+#define MAX 1000000
+// 1 * 10^5 -> byte
 
 using namespace std;
 
 vector <bool> criba(MAX, true);
-set <int> primos;
+vector <int> primos;
 
 // Generar primos
 void fillCriba(){

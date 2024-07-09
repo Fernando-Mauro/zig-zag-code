@@ -13,7 +13,9 @@ void rellenarCriba(){
     criba.set();
     // cambia a false esos dos valores
     criba.reset(0);
+    // 0 ->no son primos
     criba.reset(1);
+    // 1 -> no son primos 
     for(int i = 2; i < MAX; i++){
         if(criba[i]){
             primos.push_back(i);
@@ -24,32 +26,38 @@ void rellenarCriba(){
     }
 }
 
-bool esPrimo(unsigned long long int number){
-    int divisores = 1;
-    long long int raiz = sqrt(number);
-    for(int i = 0; i < primos.size() && primos[i] <= number; ++i){
-        int vecesPrimo = 1;
-        while(number % primos[i] == 0){
-            vecesPrimo++;
-            number /= primos[i];
+int countDivisors(unsigned long long int current){
+    int divisors = 1;
+    
+    // Iterar sobre los primos generados por la criba
+    for (int i = 0; i < primos.size(); ++i) {
+        
+        // Matematicas pero no se pq xD
+        if (primos[i] * primos[i] > current) break;
+        
+        // 10
+        // 2 3 5 7
+        int exponent = 0;
+        while (current % primos[i] == 0) {
+            // 10 % 2 == 0
+            //  10 /= 2 = 5
+            current /= primos[i];
+            ++exponent;
         }
-        divisores *= vecesPrimo;
-    }
-    if(number != 1){
-        divisores *= 2;
+        // 5
+        divisors *= (exponent + 1);
     }
 
-    if(divisores == 2){
-        // Es primo
-        return true;
-    }
-    return false;
+    // Si el número restante es mayor que 1, es primo y contribuye con un divisor más
+    if (current > 1) divisors *= 2;
+    return divisors;
 }
+
 int main(){
     unsigned long long int n;
     cin >> n;
     rellenarCriba();
-    if(esPrimo(n)){
+    if(countDivisors(n) == 2){
         cout << "si es primo";
     }else{
         cout << "no es primo";
