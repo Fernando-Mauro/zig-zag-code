@@ -2,18 +2,25 @@
 
 using namespace std;
 
-int main(){
+int main()
+{
    cin.tie(nullptr);
    ios_base::sync_with_stdio(false);
-   int n;
-   cin >> n;
-   vector <int> numeros(n);
-   for(int i = 0; i < n; i++){
-      cin >> numeros[i];
+
+   int t;
+   cin >> t;
+   vector<char> digits(t);
+
+   for (int i = 0; i < t; ++i)
+   {
+      cin >> digits[i];
    }
-   sort(numeros.begin(), numeros.end());
-   for(int i = 0; i < n; i++){
-      cout << numeros[i] << " ";
+
+   sort(digits.begin(), digits.end());
+   for (int i = 0; i < t; ++i)
+   {
+      cout << digits[i] << " ";
    }
+
    return 0;
 }
