@@ -1,64 +1,77 @@
 // https://omegaup.com/arena/problem/Escape-del-laberinto/
 #include <bits/stdc++.h>
+
 using namespace std;
 
-typedef vector<vector<char> > Matriz;
+typedef vector<vector<char>> Matriz;
 
-vector<int> fils = { -1, 0, 1, 0 };
-vector<int> cols = { 0, 1, 0, -1 };
+struct Node{
+    int x;
+    int y;
+};
 
-bool busqueda(Matriz &laberinto, int i, int j, Matriz &solucion) {
-  
-  char posActual = laberinto[i][j];
+Node inicio;
+Node salida;
 
-  if (posActual == 'S') {
-    return true;
-  }
+vector <int> vecinosX = {-1, 0, 1, 0};
+vector <int> vecinosY = {0, 1, 0, -1};
 
-  for (int k = 0; k < 4; k++) {
-    int nx = i + fils[k];
-    int ny = j + cols[k];
-    bool noSaleMatriz = (nx >= 0 && nx < laberinto.size() && ny >= 0 && ny < laberinto[nx].size());
+string BFS(Matriz &mapa, vector <vector <bool>> &visitados){
+    // BFS OCUPA COLA
+    stack <Node> adj;
+    // El primer paso es agregar el nodo inicial a la cola
+    adj.push(inicio);
 
-    if (noSaleMatriz && laberinto[nx][ny] != '#' && solucion[nx][ny] == ' ') {
-      solucion[nx][ny] = '#';
-      if (busqueda(laberinto, nx, ny, solucion)) {
-        return true;
-      }
+    // El segundo paso es vaciar la cola con un while
+    while(!adj.empty()){
+        // El tercer paso es sacar al front de la cola
+        Node actual = adj.top();
+        adj.pop();
+
+        if(mapa[actual.x][actual.y] == 'S')
+            return "Si";
+        visitados[actual.x][actual.y] = true;
+        // Cuarto paso es visitar a los vecinos del actual
+        for(int i = 0; i < 4; ++i){
+            int nuevaCordX = actual.x + vecinosX[i];
+            int nuevaCordY = actual.y + vecinosY[i];
+            // VERIFICAR QUE SEA UNA COORDENADA VALIDA(QUE NO SEA UN #, QUE NO ESTE VISITADA, O QUE NO NOS SALGAMOS DE LA MATRIZ)
+            if(nuevaCordX >= 0 && nuevaCordY >= 0 && nuevaCordX < mapa.size() && nuevaCordY < mapa[0].size() && mapa[nuevaCordX][nuevaCordY] != '#' && !visitados[nuevaCordX][nuevaCordY]){
+                // Aqui entramos si todo esta bien
+                Node nuevoNodo;
+                nuevoNodo.x = nuevaCordX;
+                nuevoNodo.y = nuevaCordY;
+                adj.push(nuevoNodo);
+            }
+        }
+
     }
-  }
-
-  return false;
+    return "No";
 }
-
 int main() {
-  int filas, columnas;
-  cin>>filas>>columnas;
-  cin.ignore();
+    int n , m;
+    cin >> n >> m;
 
-  Matriz laberinto = Matriz(filas, vector<char>(columnas, ' '));
-  Matriz solucion = Matriz(filas, vector<char>(columnas, ' '));
-  vector <string> laberintonuevo;
-  for(int i = 0; i < filas; i++){
-    getline(cin,laberintonuevo[i]);
-  }
+    Matriz mapa(n, vector <char> (m));
+    vector <vector <bool>> visitados(n, vector <bool> (m, false));
 
-  bool tieneSalida = false;
-  for (int i=0; i<filas; i++) {
-    for (int j=0; j<columnas; j++) {
-      if (laberinto[i][j] == 'E') {
-        solucion[i][j] = '#';
-        tieneSalida = busqueda(laberinto, i, j, solucion);
-        break;
-      }
+    cin.ignore();
+    for(int i = 0; i < n; ++i){
+        string temp;
+        getline(cin, temp);
+        for (int j = 0; j < m; ++j){
+            mapa[i][j] = temp[j];
+            if(temp[j] == 'E'){
+                inicio.x = i;
+                inicio.y = j;
+            }
+            if(temp[j] == 'S'){
+                salida.x = i;
+                salida.y = j;
+            }
+        }
     }
-  }
 
-  if (tieneSalida) {
-    cout<<"Si"<<endl;
-  } else {
-    cout<<"No"<<endl;
-  }
-
-  return 0;
+    cout << BFS(mapa, visitados);
+    return 0;
 }
