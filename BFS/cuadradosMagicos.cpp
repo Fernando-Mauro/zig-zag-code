@@ -1,3 +1,4 @@
+// https://omegaup.com/arena/problem/Cuadrados-Magicos/#problems
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -7,6 +8,11 @@ struct State{
     int movements;
 };
 
+struct Node{
+    short step;
+    array <short,8> parent;
+};
+
 State goal;
 
 State start = {
@@ -14,8 +20,9 @@ State start = {
     0
 };
 
-// map <array <short, 8>, array <short,8>::iterator> visited;
-set <array <short, 8>> visited;
+
+map <array <short, 8>, Node> visited;
+// set <array <short, 8>> visited;
 
 bool isGoal(State &current){
 
@@ -66,35 +73,59 @@ State visitNeighbord(short opt, State current){
     }
 }
 
-int solve(){
+void printPath(State &current){
+
+    cout << current.movements << endl;
+    auto parent = visited.find(current.numbers);
+
+    queue <short> steps;
+
+    while(parent->second.parent[0] != -1){
+        steps.push(parent->second.step);
+        parent = visited.find(parent->second.parent);
+    }
+
+    while(!steps.empty()){
+        switch(steps.front()){
+            case 1: cout << "A\n"; break;
+            case 2: cout << "B\n"; break;
+            case 3: cout << "C\n"; break;
+        }
+        steps.pop();
+    }
+
+}
+
+void solve(){
 
     queue <State> bfs;
 
     bfs.push(start);
+
+    Node startNode = {
+        -1,
+        {-1}
+    };
+    visited.insert({start.numbers, startNode});
+
     while(!bfs.empty()){
         State current = bfs.front();
         bfs.pop();
-        visited.insert(current.numbers);
 
-        if(isGoal(current))
-            return current.movements;
+        if(isGoal(current)){
+            printPath(current);
+            return;
+        }
 
         for(short i = 1; i <= 3; ++i){
             State neighbord = visitNeighbord(i, current);
             neighbord.movements++;
             if(visited.find(neighbord.numbers) == visited.end()){
                 bfs.push(neighbord);
+                
+                visited.insert({neighbord.numbers,{i, current.numbers}});
             }
         }
-
-        // State newA = A(current);
-        // State newB = B(current);
-        // State newC = C(current);
-
-        // bfs.push(newA);
-        // bfs.push(newB);
-        // bfs.push(newC);
-    
     }
 }
 
@@ -108,6 +139,7 @@ int main(){
     for(int i = 7; i >= 4; --i){
         cin >> goal.numbers[i];
     }
-    cout << solve();
+
+    solve();
     return 0;
 }
