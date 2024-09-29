@@ -1,6 +1,8 @@
-#include <iostream> 
+#include <iostream> // input output stream
 
-int main(){
-    std::cout << "Hola mundo!";
-    return 0;
+using namespace std;
+
+int main(){ 
+    // cout -> character ouput -> salida de caracteres
+    cout<<"Hola Mundo";      
 }

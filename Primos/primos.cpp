@@ -1,28 +1,42 @@
-// Como crear una criba y generar los numeros primos hasta MAX
 #include <bits/stdc++.h>
-#define MAX 10000
+
 using namespace std;
 
-vector <int> numerosPrimos;
-void criba(){
-   bitset <MAX> primos;
-   //se declara un set
-   primos.set();
-   for(int i = 2; i <= MAX; ++i){
-      //si el numero actual es true se agrega ese numero a los primos
-      if(primos[i]){
-         numerosPrimos.push_back(i);
-         //se recorren los multiplos del i hasta el maximo, 
-         for(int j = i * 2; j <= MAX; j += i){
-            //se hacen falsos a los multiplos de i
-            primos.reset(j);
-         }
-      }
-   }
+vector <bool> criba(1000000, true);
+unordered_set <int> primos;
+
+void llenarCriba() {
+    for(int i = 2; i < criba.size(); ++i) {
+
+        if(criba[i]) {
+            primos.insert(i);
+
+            for(int j = i * 2; j < criba.size(); j += i) {
+                criba[j] = false;
+            }
+        }
+    }
 }
-int main(){
-   criba();
-    for(int i = 0; i < numerosPrimos.size(); ++i){ 
-      cout << numerosPrimos[i] << endl;
-   }
+
+int main() {
+    cin.tie(nullptr);
+    ios_base::sync_with_stdio(false);
+
+    int cantNumeros;
+    cin >> cantNumeros;
+    
+    llenarCriba();
+
+    int numero;
+    while(cantNumeros--) {
+        cin >> numero;
+        if(primos.find(numero) != primos.end()) {
+            cout << "Es primo" << '\n';
+            break;
+        } else {
+            cout << "No es primo" << '\n';
+        }
+    }
+
+    return 0;
 }

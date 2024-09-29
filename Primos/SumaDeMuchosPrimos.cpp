@@ -19,24 +19,21 @@ void rellenarCriba(){
       }
    }
 }
-void factorizar(){
 
-}
 int main(){
-   cin.tie(nullptr);
-   ios_base::sync_with_stdio(false);
    int numero;
+
    cin >> numero;
    rellenarCriba();
-   // for(int i = 0; i < primos.size(); ++i){ 
-   //    cout << primos[i] << endl;
-   // }
+ 
    for(int i = primos.size() - 1; i >= 0; --i){
-      if(numero >= primos[i]){
+      
+      if(primos[i] <= numero){
          numero -= primos[i];
+
          cout << primos[i] << " ";
-         ++i;
       }
+
    }
    return 0;
 }

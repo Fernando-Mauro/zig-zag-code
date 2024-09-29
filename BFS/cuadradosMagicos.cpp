@@ -51,6 +51,7 @@ State B(State current){
     for(int i = 7; i > 4; --i){
         swap(current.numbers[i], current.numbers[i - 1]);
     }
+    return current;
 }
 
 State C(State current){
@@ -62,7 +63,8 @@ State C(State current){
     current.numbers[1] = current.numbers[5];
 
     current.numbers[5] = current.numbers[6];
-    current.numbers[6] = temp;  
+    current.numbers[6] = temp;
+    return current;  
 }
 
 State visitNeighbord(short opt, State current){

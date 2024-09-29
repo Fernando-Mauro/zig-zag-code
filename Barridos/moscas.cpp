@@ -38,7 +38,7 @@ int main(){
             i++;  
             while(moscas[i] == 0) i++;
             cout << i << "\n";
-            
+
             i--;
         }
 
